@@ -2,8 +2,8 @@
 alias untar='tar -zxvf '
 
 ## IP utils
-### Get external IP 
-alias ipe='curl ipinfo.io/ip'
+### Get external IP (echo for the newline)
+alias ipe='curl ipinfo.io/ip && echo ""'
 ### Get local IP
 alias ipi='ipconfig getifaddr en0'
 
