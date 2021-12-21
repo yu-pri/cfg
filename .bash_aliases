@@ -1,3 +1,8 @@
+function doesCommandExist() {
+    the_command=$1
+    command -v "${the_command}" &>/dev/null
+}
+
 # General Bash Utilities
 alias untar='tar -zxvf '
 
@@ -11,7 +16,9 @@ alias ipi='ipconfig getifaddr en0'
 alias ngtoken='1Yf1P0WF7L6EbtA60oBJiGQ9Xs0_3LQH1xLnGGwFBYDeQd6QV'
 
 ## Flutter/Dart/Pub
-
+if doesCommandExist fvm; then
+    alias flutter='fvm flutter'
+fi
 alias flak='flutter clean'
 alias fpg='flutter pub get'
 
@@ -24,10 +31,10 @@ alias regen-mockito='flutter pub get && rm test/*.mocks.dart || true && flutter 
 
 ## Safety nets
 
-### do not delete / or prompt if deleting more than 3 files at a time 
+### do not delete / or prompt if deleting more than 3 files at a time
 alias rm='rm -i'
- 
-### confirmation 
+
+### confirmation
 alias mv='mv -i'
 alias cp='cp -i'
 alias ln='ln -i'
