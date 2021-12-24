@@ -1,7 +1,5 @@
-function doesCommandExist() {
-    the_command=$1
-    command -v "${the_command}" &>/dev/null
-}
+self_dir="$(cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P)"
+. "${self_dir}/.bash_functions"
 
 # General Bash Utilities
 alias untar='tar -zxvf '
@@ -17,8 +15,9 @@ alias ngtoken='1Yf1P0WF7L6EbtA60oBJiGQ9Xs0_3LQH1xLnGGwFBYDeQd6QV'
 
 ## Flutter/Dart/Pub
 if doesCommandExist fvm; then
-    alias flutter='fvm flutter'
+    addPath "~/fvm/default/bin"
 fi
+
 alias flak='flutter clean'
 alias fpg='flutter pub get'
 
