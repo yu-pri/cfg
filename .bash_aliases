@@ -15,7 +15,7 @@ alias ngtoken='1Yf1P0WF7L6EbtA60oBJiGQ9Xs0_3LQH1xLnGGwFBYDeQd6QV'
 
 ## Flutter/Dart/Pub
 if doesCommandExist fvm; then
-    addPath "~/fvm/default/bin"
+    addPath "$HOME/fvm/default/bin/"
 fi
 
 alias flak='flutter clean'
