@@ -42,3 +42,6 @@ alias ln='ln -i'
 alias ls='ls -F'
 alias ll='ls -lh'
 alias la='ls -a'
+
+alias atcp='adb tcpip 5555'
+alias acon='adb connect'
