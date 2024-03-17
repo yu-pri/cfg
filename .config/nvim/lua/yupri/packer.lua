@@ -93,4 +93,27 @@ return require('packer').startup(function(use)
     use {
         'numToStr/Comment.nvim',
     }
+
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+    }
+
+    use {
+        "folke/which-key.nvim",
+        config = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 500
+            require("which-key").setup {
+            }
+        end
+    }
+
+    use({
+        "okuuva/auto-save.nvim",
+        config = function()
+            require("auto-save").setup {
+            }
+        end,
+    })
 end)
