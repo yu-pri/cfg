@@ -16,19 +16,52 @@ lsp_zero.on_attach(function(_, bufnr)
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
+lsp_zero.format_on_save {
+    format_opts = {
+        async = false,
+        timeout_ms = 10000,
+    },
+    servers = {
+        ['rust_analyzer'] = { 'rust' },
+        ['gopls'] = { 'go' },
+        --['goimports'] = { 'go' },
+    }
+}
+
 -- to learn how to use mason.nvim with lsp-zero
 -- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
-require('mason').setup({})
+require('mason').setup {
+    ensure_installed = { 'goimports' }
+}
+
 local lspconfig = require('mason-lspconfig')
-lspconfig.setup({
-    ensure_installed = { 'lua_ls' },
-    handlers = {
-        lsp_zero.default_setup
-    },
-})
-require('neodev').setup {}
 
 local nvim_lspconfig = require("lspconfig")
+lspconfig.setup({
+    ensure_installed = { 'lua_ls', 'gopls' },
+    handlers = {
+        lsp_zero.default_setup,
+        lua_ls = function()
+            nvim_lspconfig.lua_ls.setup {
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = { 'vim' }
+                        },
+                        completion = {
+                            callSnippet = "Replace"
+                        }
+                    }
+                }
+            }
+        end,
+        gopls = function()
+            nvim_lspconfig.gopls.setup {}
+        end
+    },
+})
+
+-- isn't installed via mason; has to be handled separately
 nvim_lspconfig.dartls.setup {
     cmd = { "dart", 'language-server', '--protocol=lsp' },
     settings = {
@@ -39,18 +72,7 @@ nvim_lspconfig.dartls.setup {
     },
 }
 
-nvim_lspconfig.lua_ls.setup {
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { 'vim' }
-            },
-            completion = {
-                callSnippet = "Replace"
-            }
-        }
-    }
-}
+require('neodev').setup {}
 
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
