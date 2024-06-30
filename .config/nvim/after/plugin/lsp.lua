@@ -30,7 +30,6 @@ lsp_zero.format_on_save {
     servers = {
         ['rust_analyzer'] = { 'rust' },
         ['gopls'] = { 'go' },
-        --['goimports'] = { 'go' },
     }
 }
 
@@ -66,17 +65,6 @@ lspconfig.setup({
         end
     },
 })
-
--- isn't installed via mason; has to be handled separately
-nvim_lspconfig.dartls.setup {
-    cmd = { "dart", 'language-server', '--protocol=lsp' },
-    settings = {
-        dart = {
-            completeFunctionCalls = true,
-            showTodos = true,
-        },
-    },
-}
 
 require('neodev').setup {}
 

@@ -1,4 +1,4 @@
-local neotree = require('neo-tree')
-neotree.setup {}
+--local neotree = require('neo-tree')
+--neotree.setup {}
 
-vim.keymap.set('n', '<C-p>', '<Cmd>Neotree toggle<CR>')
+--vim.keymap.set('n', '<C-p>', '<Cmd>Neotree toggle<CR>')
