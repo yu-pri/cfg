@@ -112,4 +112,8 @@ return require('packer').startup(function(use)
 
     use { 'mhinz/vim-signify' }
 
+    use {
+        "nvim-telescope/telescope-file-browser.nvim",
+        requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+    }
 end)
